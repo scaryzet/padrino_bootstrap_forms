@@ -151,8 +151,7 @@ module BootstrapForms
           content_tag(:div, :class => 'controls') do
             options = @field_options.merge(required_attribute)
             records.collect do |record|
-              options[:id] = "#{object_name}_#{attribute}_#{record.send(record_id)}"
-              radiobutton = radio_button_tag("#{object_name}[#{attribute}]", record.send(record_id), object.send(attribute) == record.send(record_id), options)
+              radiobutton = radio_button(attribute, record.send(record_id), options)
 
               content_tag(:label, :class => ['radio', ('inline' if @field_options[:inline])].compact) do
                 radiobutton + content_tag(:span, record.send(record_name))
