@@ -105,14 +105,16 @@ module BootstrapForms
       @name = name
       @field_options = @options.slice(:namespace, :index).merge(opts.merge(required_attribute))
       control_group_div do
-        label_field + input_div do
-          klasses = 'radio'
-          klasses << ' inline' if @field_options.delete(:inline) == true
-          values.map do |text, value|
-            label("#{@name}_#{value}", :class => klasses) do
-              extras { radio_button(name, value, @field_options) + text }
-            end
-          end.join.html_safe
+        label_field + extras do
+          content_tag(:div, :class => 'controls') do
+            klasses = 'radio'
+            klasses << ' inline' if @field_options.delete(:inline) == true
+            values.map do |text, value|
+              label("#{@name}_#{value}", :class => klasses) do
+                radio_button(name, value, @field_options) + text
+              end
+            end.join('').html_safe
+          end
         end
       end
     end
