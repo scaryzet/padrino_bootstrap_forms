@@ -131,7 +131,7 @@ module BootstrapForms
             records.collect do |record|
               options[:id] = "#{object_name}_#{attribute}_#{record.send(record_id)}"
               checkbox = check_box_tag("#{object_name}[#{attribute}][]", record.send(record_id), [object.send(attribute)].flatten.include?(record.send(record_id)), options)
-              
+
               content_tag(:label, :class => ['checkbox', ('inline' if @field_options[:inline])].compact) do
                 checkbox + content_tag(:span, record.send(record_name))
               end
