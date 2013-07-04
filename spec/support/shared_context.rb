@@ -131,6 +131,20 @@ shared_examples 'a bootstrap form' do
       end
     end
 
+    describe 'collection_check_boxes' do      
+      before do
+        @options = [ [["foo", "Foo"], ["bar", "Bar"]], :first, :last ]
+      end
+
+      it 'generates wrapped input' do        
+        @builder.collection_check_boxes(:name, *@options).should eq "<div class=\"control-group\"><label class=\"control-label\" for=\"item_name\">Name</label><div class=\"controls\"><label class=\"checkbox\"><input id=\"item_name_foo\" name=\"item[name][]\" type=\"checkbox\" value=\"foo\" /><span>Foo</span></label><label class=\"checkbox\"><input id=\"item_name_bar\" name=\"item[name][]\" type=\"checkbox\" value=\"bar\" /><span>Bar</span></label></div></div>"
+      end      
+
+      it 'adds block help' do
+        @builder.collection_check_boxes(:name, *@options, :help_block => "Help me!").should == "<div class=\"control-group\"><label class=\"control-label\" for=\"item_name\">Name</label><div class=\"controls\"><label class=\"checkbox\"><input id=\"item_name_foo\" name=\"item[name][]\" type=\"checkbox\" value=\"foo\" /><span>Foo</span></label><label class=\"checkbox\"><input id=\"item_name_bar\" name=\"item[name][]\" type=\"checkbox\" value=\"bar\" /><span>Bar</span></label></div><span class=\"help-block\">Help me!</span></div>"
+      end
+    end
+
     describe 'collection select' do
       before(:each) do
         @result = @builder.collection_select(:name, [["foo", "Foo"]], :first, :last)
