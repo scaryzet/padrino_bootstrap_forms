@@ -127,11 +127,11 @@ module BootstrapForms
       control_group_div do
         label_field + extras do
           content_tag(:div, :class => 'controls') do
-            options = @field_options.merge(required_attribute)
+            options = @field_options.except(*BOOTSTRAP_OPTIONS).merge(required_attribute)
             records.collect do |record|
               options[:id] = "#{object_name}_#{attribute}_#{record.send(record_id)}"
               checkbox = check_box_tag("#{object_name}[#{attribute}][]", record.send(record_id), [object.send(attribute)].flatten.include?(record.send(record_id)), options)
-
+              
               content_tag(:label, :class => ['checkbox', ('inline' if @field_options[:inline])].compact) do
                 checkbox + content_tag(:span, record.send(record_name))
               end
