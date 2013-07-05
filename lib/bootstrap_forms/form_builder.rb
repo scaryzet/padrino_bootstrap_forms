@@ -64,20 +64,20 @@ module BootstrapForms
 
       control_group_div do
         label_field + extras do
-          content_tag(:div, :class => 'controls') do
-            records.collect do |record|
-              value = record.send(record_id)
-              element_id = "#{object_model_name}_#{attribute}_#{value}"
+          control_content = records.collect do |record|
+            value = record.send(record_id)
+            element_id = "#{object_model_name}_#{attribute}_#{value}"
 
-              options = objectify_options(@field_options).merge(:id => element_id, :value => value)
-              options[:checked] = "checked" if [object.send(attribute)].flatten.include?(value)
+            options = objectify_options(@field_options).merge(:id => element_id, :value => value)
+            options[:checked] = "checked" if [object.send(attribute)].flatten.include?(value)
 
-              checkbox = check_box_tag("#{object_model_name}[#{attribute}][]", options)
-              content_tag(:label, :class => ['checkbox', ('inline' if @field_options[:inline])].compact.join(' ')) do
-                checkbox + content_tag(:span, record.send(record_name))
-              end
-            end.join.html_safe
-          end
+            checkbox = check_box_tag("#{object_model_name}[#{attribute}][]", options)
+            label_content = checkbox + content_tag(:span, record.send(record_name))
+            label_class = ['checkbox', ('inline' if @field_options[:inline])].compact.join(' ')
+            content_tag(:label, label_content, :class => label_class)
+          end.join.html_safe
+
+          content_tag(:div, control_content, :class => 'controls')
         end
       end
     end
@@ -89,20 +89,20 @@ module BootstrapForms
 
       control_group_div do
         label_field + extras do
-          content_tag(:div, :class => 'controls') do
-            records.collect do |record|
-              value = record.send(record_id)
-              element_id = "#{object_model_name}_#{attribute}_#{value}"
+          control_content = records.collect do |record|
+            value = record.send(record_id)
+            element_id = "#{object_model_name}_#{attribute}_#{value}"
 
-              options = objectify_options(@field_options).merge(:id => element_id, :value => value)
-              options[:checked] = "checked" if value == object.send(attribute)
+            options = objectify_options(@field_options).merge(:id => element_id, :value => value)
+            options[:checked] = "checked" if value == object.send(attribute)
 
-              radiobutton = radio_button_tag("#{object_model_name}[#{attribute}]", options)
-              content_tag(:label, :class => ['radio', ('inline' if @field_options[:inline])].compact.join(' ')) do
-                radiobutton + content_tag(:span, record.send(record_name))
-              end
-            end.join.html_safe
-          end
+            radiobutton = radio_button_tag("#{object_model_name}[#{attribute}]", options)
+            label_content = radiobutton + content_tag(:span, record.send(record_name))
+            label_class = ['radio', ('inline' if @field_options[:inline])].compact.join(' ')
+            content_tag(:label, label_content, :class => label_class)
+          end.join.html_safe
+
+          content_tag(:div, control_content, :class => 'controls')
         end
       end
     end
