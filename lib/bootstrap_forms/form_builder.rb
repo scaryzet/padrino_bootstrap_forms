@@ -53,7 +53,7 @@ module BootstrapForms
               html = extras { radio_button(name, options) + text }
               label("#{name}_#{value}", :caption => html, :class => 'radio')
             end
-          end.join('')
+          end.join.html_safe
         end
       end
     end
@@ -76,7 +76,7 @@ module BootstrapForms
               content_tag(:label, :class => ['checkbox', ('inline' if @field_options[:inline])].compact.join(' ')) do
                 checkbox + content_tag(:span, record.send(record_name))
               end
-            end.join('')
+            end.join.html_safe
           end
         end
       end
@@ -101,7 +101,7 @@ module BootstrapForms
               content_tag(:label, :class => ['radio', ('inline' if @field_options[:inline])].compact.join(' ')) do
                 radiobutton + content_tag(:span, record.send(record_name))
               end
-            end.join('')
+            end.join.html_safe
           end
         end
       end
@@ -131,7 +131,7 @@ module BootstrapForms
 
     def actions(&block)
       content_tag(:div, :class => 'form-actions') do
-        block_given? ? capture_html(&block) : [submit, cancel].join(' ')
+        block_given? ? capture_html(&block) : [submit, cancel].join(' ').html_safe
       end
     end
   end

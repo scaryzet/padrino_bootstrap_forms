@@ -83,7 +83,7 @@ module BootstrapForms
           if block_given?
             capture_html(&block)
           else
-            [bootstrap_submit_tag, bootstrap_cancel_tag].join(' ')
+            [bootstrap_submit_tag, bootstrap_cancel_tag].join(' ').html_safe
           end
         end
       end
