@@ -130,9 +130,8 @@ module BootstrapForms
     end
 
     def actions(&block)
-      content_tag(:div, :class => 'form-actions') do
-        block_given? ? capture_html(&block) : [submit, cancel].join(' ').html_safe
-      end
+      content = block_given? ? capture_html(&block) : [submit, cancel].join(' ').html_safe
+      content_tag(:div, content, :class => 'form-actions')
     end
   end
 end
