@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "padrino_bootstrap_forms"
-  s.version     = "0.0.2"
+  s.version     = "0.1.0"
   s.authors     = ["Seth Vargo", "Skye Shaw"]
   s.email	= "skye.shaw@gmail.com"
   s.homepage    = "https://github.com/sshaw/padrino_bootstrap_forms"
