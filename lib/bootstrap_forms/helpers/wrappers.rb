@@ -17,6 +17,7 @@ module BootstrapForms
         klasses << 'info'    if @field_options[:info]
         klasses << 'success' if @field_options[:success]
         klasses << 'warning' if @field_options[:warning]
+        klasses << @field_options[:control_group_class] if @field_options[:control_group_class]
         klass = klasses.join(' ')
 
         content_tag(:div, capture_html(&block), :class => klass)
@@ -83,7 +84,7 @@ module BootstrapForms
       end
 
       def objectify_options(options)
-        options.except(:label, :help_block, :help_inline, :error, :success, :warning, :info, :prepend, :append)
+        options.except(:label, :help_block, :help_inline, :error, :success, :warning, :info, :prepend, :append, :control_group_class)
       end
     end
   end
