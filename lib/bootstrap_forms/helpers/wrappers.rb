@@ -64,7 +64,7 @@ module BootstrapForms
       end
 
       %w(help_block help_inline error success warning info append prepend).each do |method_name|
-        define_method(method_name) do |*args|
+        define_method('_' + method_name) do |*args|
           return '' unless value = @field_options[method_name.to_sym]
           case method_name
           when 'help_block'
@@ -79,7 +79,7 @@ module BootstrapForms
       end
 
       def extras(&block)
-        [prepend, (capture_html(&block) if block_given?), append, help_inline, error, success, warning, info, help_block].join('').html_safe
+        [_prepend, (capture_html(&block) if block_given?), _append, _help_inline, _error, _success, _warning, _info, _help_block].join('').html_safe
       end
 
       def objectify_options(options)
