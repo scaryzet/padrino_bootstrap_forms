@@ -28,7 +28,7 @@ module BootstrapForms
           errors = object.errors[@name]
           if errors.any?
             errors.map { |e|
-              "#{@field_options[:label] || @name.to_s.humanize} #{e}"
+              "#{@field_options[:label] || field_human_name(@name)} #{e}"
             }.join(', ')
           end
         end
