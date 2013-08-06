@@ -31,7 +31,7 @@ module BootstrapForms
           if @field_options[:label] == false || @field_options[:label] == ''
             extras { super(name, objectify_options(@field_options)) }
           else
-            html = extras { super(name, objectify_options(@field_options)) << (@field_options[:label].blank? ? @name.to_s.humanize : @field_options[:label]) }
+            html = extras { super(name, objectify_options(@field_options)) << (@field_options[:label].blank? ? field_human_name(@name) : @field_options[:label]) }
             options = { :caption => html, :class => 'checkbox' }
             options[:for] = @field_options[:id] if @field_options.include?(:id)
             label(@name, options)
